@@ -1,0 +1,118 @@
+/* ==========================================================================
+   Discografía: una foto por disco + singles en lista
+   ========================================================================== */
+.discos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));
+  gap:clamp(16px,2vw,28px)}
+.disco{display:block;border:1px solid var(--line);border-radius:4px;overflow:hidden;
+  background:var(--panel);text-decoration:none;transition:transform .3s var(--ease),border-color .3s var(--ease)}
+.disco:hover{transform:translateY(-5px);border-color:rgba(52,211,220,.55)}
+.disco .arte{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--panel2)}
+.disco .arte img{width:100%;height:100%;object-fit:cover;display:block}
+.disco .arte .etiqueta{position:absolute;top:.75rem;left:.75rem;right:auto;width:auto;
+  display:inline-block;background:var(--amber);
+  color:#0A0A0B;font:700 .6rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;
+  padding:.3rem .55rem;border-radius:2px}
+.disco .cuerpo{padding:1rem 1.15rem 1.25rem}
+.disco .cuerpo .meta{display:block;font:600 .66rem/1 var(--body);letter-spacing:.13em;
+  text-transform:uppercase;color:var(--muted2);margin-bottom:.4rem}
+.disco .cuerpo h3{font-family:var(--disp);font-size:1.3rem;line-height:1.08;color:var(--cream);
+  letter-spacing:.01em}
+.singles{margin-top:clamp(30px,4vw,54px);border-top:1px solid var(--line);
+  padding-top:clamp(22px,3vw,34px)}
+.singles-tit{font-family:var(--disp);font-size:1.05rem;letter-spacing:.03em;color:var(--cream);
+  margin-bottom:1rem}
+.singles-tit span{font-family:var(--body);font-size:.78rem;letter-spacing:.04em;color:var(--muted2)}
+.singles-lista{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:0 clamp(18px,2.4vw,42px)}
+.singles-lista a{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  padding:.5rem 0;border-bottom:1px solid rgba(242,238,230,.07);color:var(--muted);
+  font-size:.9rem;text-decoration:none;transition:color .2s}
+.singles-lista a:hover{color:var(--amber)}
+.singles-lista a span{color:var(--muted2);font-size:.75rem;letter-spacing:.06em;white-space:nowrap}
+@media(max-width:700px){.discos-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .singles-lista{grid-template-columns:1fr}}
+
+/* ---------- tarjeta de lanzamiento (Lo último) ---------- */
+.dos .bloque-disco{background:var(--panel);border:1px solid var(--line);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .35s var(--ease),transform .35s var(--ease)}
+.dos .bloque-disco:hover{border-color:rgba(52,211,220,.45);transform:translateY(-4px)}
+.dos .bloque-disco.destacado{border-color:rgba(52,211,220,.55)}
+.bloque-disco .arte{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--ink2)}
+.bloque-disco .arte img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.dos .bloque-disco:hover .arte img{transform:scale(1.04)}
+.bloque-disco .cuerpo{padding:clamp(1.2rem,2vw,1.7rem);display:flex;flex-direction:column;gap:.7rem;align-items:flex-start}
+.bloque-disco h3{font-family:var(--disp);font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1;letter-spacing:-.01em;margin:0}
+.meta-disco{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin:0}
+.bloque-disco .btn{width:100%;justify-content:center}
+
+/* ---------- entradas / gira ---------- */
+.gira{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(24px,4vw,56px);align-items:start;margin-top:clamp(30px,4vw,54px)}
+.cartel{border:1px solid var(--line2);border-radius:4px;overflow:hidden;background:var(--ink2)}
+.cartel img{width:100%;display:block}
+.cita-sala{font-size:1rem;line-height:1.6;color:rgba(242,238,230,.9);border-left:3px solid var(--amber);padding-left:1.1rem;margin:1.6rem 0 0;font-weight:300}
+.cita-sala cite{display:block;font-style:normal;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted2);margin-top:.7rem}
+.conciertos{display:grid;gap:1rem}
+.concierto{display:grid;grid-template-columns:auto 1fr auto;gap:1.2rem;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:1.4rem 1.3rem;transition:border-color .35s var(--ease),transform .35s var(--ease)}
+.concierto:hover{border-color:rgba(52,211,220,.5);transform:translateY(-3px)}
+.concierto.destacado{border-left:3px solid var(--amber)}
+.fecha-g{text-align:center;line-height:1}
+.fecha-g b{display:block;font-family:var(--disp);font-size:2.1rem;color:var(--cream)}
+.fecha-g span{display:block;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-top:.25rem}
+.fecha-g i{display:block;font-style:normal;font-size:.72rem;color:var(--muted2);margin-top:.3rem}
+.concierto .sitio b{display:block;font-family:var(--disp);font-size:1.35rem;letter-spacing:.01em;line-height:1.05}
+.concierto .sitio span{display:block;font-size:.86rem;color:var(--muted);margin-top:.35rem}
+.concierto .sitio em{font-style:normal;color:var(--amber2)}
+.aviso-entradas{font-size:.86rem;color:var(--muted2);margin-top:1.4rem;border-left:2px solid var(--line2);padding-left:1rem}
+@media(max-width:900px){
+  .gira{grid-template-columns:1fr}
+  .concierto{grid-template-columns:auto 1fr;row-gap:.9rem}
+  .concierto .btn{grid-column:1/-1;justify-content:center}
+}
+
+/* ---------- tienda ---------- */
+.tienda-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,28px);margin-top:clamp(30px,4vw,50px)}
+.producto{background:var(--panel);border:1px solid var(--line);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .35s var(--ease),transform .35s var(--ease)}
+.producto:hover{border-color:rgba(52,211,220,.45);transform:translateY(-4px)}
+.arte-prod{background:#F2EEE6;aspect-ratio:1/1;overflow:hidden}
+.arte-prod img{width:100%;height:100%;object-fit:cover}
+.producto .cuerpo{padding:1.2rem 1.2rem 1.5rem;display:flex;flex-direction:column;gap:.45rem}
+.etiqueta-p{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
+.producto h3{font-family:var(--disp);font-size:1.35rem;letter-spacing:.01em;margin:0}
+.precio{font-size:1.05rem;color:var(--cream);font-weight:600;margin:0}
+.tallas{font-size:.76rem;color:var(--muted2);margin:0}
+.cuerpo-p{font-size:.84rem;color:var(--muted);margin:.35rem 0 0}
+@media(max-width:900px){.tienda-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.tienda-grid{grid-template-columns:1fr}}
+
+/* ---------- reproductor: texto de cada corte ---------- */
+.corte .corte-txt{display:flex;flex-direction:column;gap:.2rem;min-width:0;text-align:left}
+.corte .corte-txt b{font-size:.98rem;font-weight:500;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.corte .corte-txt span{font-size:.74rem;color:var(--muted2);letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.corte.sonando .corte-txt b{color:var(--amber)}
+.corte.sonando{border-color:rgba(52,211,220,.45)}
+
+/* ---------- el 284 ---------- */
+.cifras-sierra{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.4vw,30px);margin:2.2rem 0 0}
+.cifras-sierra div{border-top:1px solid var(--line);padding-top:1rem}
+.cifras-sierra b{display:block;font-family:var(--disp);font-size:1.5rem;color:var(--amber);margin-bottom:.35rem}
+.cifras-sierra span{font-size:.84rem;color:var(--muted)}
+@media(max-width:700px){.cifras-sierra{grid-template-columns:1fr}}
+
+/* ---------- mayo 214: respiro en el titular ---------- */
+.hero h1{word-spacing:.07em}
+.vid figcaption b{margin-bottom:.15rem}
+.arte-disco{border:1px solid var(--line2);border-radius:4px;overflow:hidden;background:var(--ink2);align-self:start}
+.arte-disco img{width:100%;display:block}
+.etiqueta-suelta{display:inline-block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);border:1px solid rgba(52,211,220,.4);background:rgba(52,211,220,.08);padding:.4rem .8rem;border-radius:2px;margin-bottom:1.1rem}
+.dos .texto{font-size:1.02rem;line-height:1.7;color:rgba(242,238,230,.86);font-weight:300}
+
+/* ---------- barra de reproducción: texto ---------- */
+.barra-txt{display:flex;flex-direction:column;gap:.15rem;min-width:0}
+.barra-txt b{font-size:.92rem;font-weight:500;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.barra-txt span{font-size:.74rem;color:var(--amber);letter-spacing:.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cerrar-barra{margin-left:.4rem}
+@media(max-width:700px){
+  .barra-txt{display:none}
+  .barra-fija .barra-in{gap:.7rem}
+}
+.boton-centro{text-align:center;margin-top:2.6rem}
+.pie-marca{font-family:var(--disp);font-size:1.6rem;letter-spacing:.06em;color:var(--cream)}

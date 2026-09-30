@@ -1,0 +1,32 @@
+  </div>
+</section>
+
+<!-- BARRA FIJA -->
+<div class="barra-fija" id="barra">
+  <div class="wrap barra-in">
+    <div class="barra-info">
+      <img id="b-portada" src="assets/portadas/1661104713.webp" alt="">
+      <div class="barra-txt">
+        <b id="b-tema">Selecciona un tema</b>
+        <span id="b-album">MAYO 214</span>
+      </div>
+    </div>
+    <div class="barra-controles">
+      <button class="barra-btn" id="b-prev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+      </button>
+      <button class="barra-btn principal" id="b-play" aria-label="Reproducir">
+        <svg viewBox="0 0 24 24" id="b-icono"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <button class="barra-btn" id="b-next" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg>
+      </button>
+    </div>
+    <div class="barra-progreso">
+      <div class="progreso" id="b-progreso"><i id="b-relleno"></i></div>
+      <span class="tiempo" id="b-tiempo">0:00 / 0:30</span>
+    </div>
+    <button class="barra-btn cerrar-barra" id="b-cierra" aria-label="Cerrar reproductor">&times;</button>
+  </div>
+</div>
+<audio id="audio" preload="none"></audio>
