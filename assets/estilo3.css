@@ -101,6 +101,15 @@
 .hero h1{word-spacing:.07em}
 .vid figcaption b{margin-bottom:.15rem}
 .arte-disco{border:1px solid var(--line2);border-radius:4px;overflow:hidden;background:var(--ink2);align-self:start}
+
+/* ---------- mayo 214: foto en directo, banda a todo el ancho bajo el hero ---------- */
+.directo{position:relative;margin:0;padding:0;background:var(--ink);line-height:0;overflow:hidden}
+.directo::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(7,11,16,.62) 0%,rgba(7,11,16,0) 20%,rgba(7,11,16,0) 74%,rgba(7,11,16,.68) 100%)}
+.directo img{display:block;width:100%;height:clamp(300px,46vw,640px);object-fit:cover;object-position:50% 14%}
+@media (max-width:760px){
+  .directo img{height:clamp(280px,74vw,430px);object-position:50% 14%}
+}
 .arte-disco img{width:100%;display:block}
 .etiqueta-suelta{display:inline-block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);border:1px solid rgba(52,211,220,.4);background:rgba(52,211,220,.08);padding:.4rem .8rem;border-radius:2px;margin-bottom:1.1rem}
 .dos .texto{font-size:1.02rem;line-height:1.7;color:rgba(242,238,230,.86);font-weight:300}
