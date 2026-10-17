@@ -24,7 +24,31 @@
   /* ============ sound (WebAudio, sin ficheros) ============ */
   var actx = null, soundOn = localStorage.getItem(LS.snd) !== '0';
   var sndBtn = document.getElementById('snd');
+  var song = document.getElementById('song');
   if (!soundOn) sndBtn.classList.add('off');
+
+  /* canción de fondo: «Nunca me fui» */
+  if (song) {
+    song.volume = 0.42;
+    song.muted = !soundOn;
+  }
+  function playSong() {
+    if (!song || !soundOn) return;
+    var pr = song.play();
+    if (pr && pr.catch) pr.catch(function () {});
+  }
+  function armSong() {
+    function start() {
+      playSong();
+      document.removeEventListener('pointerdown', start, true);
+      document.removeEventListener('keydown', start, true);
+      document.removeEventListener('touchstart', start, true);
+    }
+    document.addEventListener('pointerdown', start, true);
+    document.addEventListener('keydown', start, true);
+    document.addEventListener('touchstart', start, true);
+    playSong();
+  }
 
   function ac() {
     if (!actx) {
@@ -64,7 +88,8 @@
     localStorage.setItem(LS.snd, soundOn ? '1' : '0');
     sndBtn.classList.toggle('off', !soundOn);
     sndBtn.setAttribute('aria-pressed', String(soundOn));
-    if (soundOn) sndPick();
+    if (song) song.muted = !soundOn;
+    if (soundOn) { playSong(); sndPick(); }
   });
 
   /* ============ construction ============ */
@@ -116,7 +141,7 @@
   function isHardEnough(arr) {
     var fixed = 0;
     for (var i = 0; i < N; i++) if (arr[i] === i) fixed++;
-    return fixed <= 2 && !isSolvedArr(arr);
+    return fixed === 0 && !isSolvedArr(arr);
   }
 
   function isSolvedArr(arr) {
@@ -349,7 +374,7 @@
   var cvs = document.getElementById('confetti');
   var ctx = cvs.getContext('2d');
   var parts = [], rafId = null;
-  var COLORS = ['#34D3DC', '#7FE9F0', '#F1F3F4', '#E23A5A', '#1B9AA6'];
+  var COLORS = ['#FF4D6A', '#FF8A9B', '#F1F3F4', '#C1102E', '#FF3355'];
 
   function sizeCanvas() {
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -460,7 +485,7 @@
     top.addColorStop(1, 'rgba(7,11,16,0)');
     g.fillStyle = top; g.fillRect(0, 0, W, 260);
 
-    g.fillStyle = '#34D3DC';
+    g.fillStyle = '#FF3355';
     g.fillRect(64, 60, 64, 4);
 
     g.fillStyle = '#F1F3F4';
@@ -472,7 +497,7 @@
     g.font = '600 19px Inter, sans-serif';
     g.fillText('EXPERIENCIA VIP · EN DIRECTO', 64, 132);
 
-    g.fillStyle = 'rgba(52,211,220,.95)';
+    g.fillStyle = 'rgba(255,51,85,.95)';
     g.font = '700 22px Inter, sans-serif';
     g.fillText('ACCESO DESBLOQUEADO', 64, H - 400);
 
@@ -480,7 +505,7 @@
     g.font = '400 118px Anton, Impact, sans-serif';
     g.fillText('PASE VIP', 60, H - 366);
 
-    g.fillStyle = '#7FE9F0';
+    g.fillStyle = '#FF8A9B';
     g.fillRect(64, H - 218, W - 128, 1);
 
     g.fillStyle = '#F1F3F4';
@@ -493,7 +518,7 @@
 
     g.fillStyle = 'rgba(241,243,244,.42)';
     g.font = '400 19px Inter, sans-serif';
-    g.fillText('Concierto MAYO 214 · ' + fmt(seconds) + ' · ' + moves + ' movimientos', 64, H - 92);
+    g.fillText('Concierto MAYO 214 · ' + (seconds > 0 ? fmt(seconds) + ' · ' : '') + moves + ' movimientos', 64, H - 92);
 
     c.toBlob(function (blob) {
       if (!blob) { toast('No se pudo generar el pase'); return; }
@@ -528,6 +553,7 @@
   build();
   newGame();
   try { if (localStorage.getItem(LS.code)) document.getElementById('passBtn').hidden = false; } catch (e) {}
+  armSong();
   window.addEventListener('load', function () {
     document.body.classList.add('ready');
   });
