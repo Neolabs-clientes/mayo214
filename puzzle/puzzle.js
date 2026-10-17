@@ -554,6 +554,22 @@
   newGame();
   try { if (localStorage.getItem(LS.code)) document.getElementById('passBtn').hidden = false; } catch (e) {}
   armSong();
+  /* ============ portada ============ */
+  var gate = document.getElementById('gate');
+  if (gate) {
+    var entered = false;
+    var enter = function () {
+      if (entered) return;
+      entered = true;
+      gate.classList.add('off');
+      playSong();
+      sndPick();
+      setTimeout(function () { if (gate.parentNode) gate.parentNode.removeChild(gate); }, 700);
+    };
+    gate.addEventListener('click', enter);
+    gate.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') enter(); });
+  }
+
   window.addEventListener('load', function () {
     document.body.classList.add('ready');
   });
