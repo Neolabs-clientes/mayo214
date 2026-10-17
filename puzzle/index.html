@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#070B10">
+<title>MAYO 214 · El puzzle del 214 — Acceso VIP</title>
+<meta name="description" content="Reconstruye la imagen del 214 y desbloquea el acceso anticipado a las entradas del concierto de MAYO 214 por 18 €. Experiencia VIP.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MAYO 214 — El puzzle del 214">
+<meta property="og:description" content="Completa el puzzle y desbloquea tu entrada anticipada por 18 €.">
+<meta property="og:image" content="https://neolabs-clientes.github.io/mayo214/puzzle/puzzle.jpg">
+<meta property="og:url" content="https://neolabs-clientes.github.io/mayo214/puzzle/">
+<link rel="canonical" href="https://neolabs-clientes.github.io/mayo214/puzzle/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="puzzle.css">
+</head>
+<body>
+
+<div class="flashfx" id="flash"></div>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="../index.html">MAYO <b>214</b><span class="dot"></span></a>
+    <div class="top-r">
+      <span class="pill-vip"><svg viewBox="0 0 24 24"><path d="M4 5h16v3a2 2 0 000 4v3H4v-3a2 2 0 000-4z"/></svg> Acceso anticipado</span>
+      <button class="snd" id="snd" aria-label="Sonido" aria-pressed="true">
+        <svg viewBox="0 0 24 24"><path d="M4 9v6h3l5 4V5L7 9H4z"/><path d="M16.5 8.5a5 5 0 010 7"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap stage">
+  <section class="copy">
+    <span class="eyebrow">Experiencia VIP</span>
+    <h1>Reconstruye<br><span>el 214</span></h1>
+    <p class="lead">Nueve piezas. Una sola imagen. <b>Si la completas</b>, se abre algo que el resto todavía no puede comprar.</p>
+
+    <ul class="how">
+      <li><span class="n">1</span><span>Toca una pieza y luego otra para cambiarlas de sitio.</span></li>
+      <li><span class="n">2</span><span>Guíate por la foto: cada pieza tiene un único lugar.</span></li>
+      <li><span class="n">3</span><span>Completa el puzzle y desbloquea tu entrada anticipada.</span></li>
+    </ul>
+
+    <div class="reward">
+      <span class="k">La recompensa</span>
+      <span class="v">Entrada anticipada · 18 €</span>
+      <span class="s">Antes que el resto. Solo por completar el puzzle.</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="hud-top">
+      <span class="lbl">En directo · Sierra Oeste</span>
+      <div class="stats">
+        <span class="stat"><i>Tiempo</i><b class="mono" id="time">0:00</b></span>
+        <span class="stat"><i>Movs</i><b class="mono" id="moves">0</b></span>
+      </div>
+    </div>
+
+    <div class="board" id="board" role="grid" aria-label="Puzzle de 9 piezas: ordena la imagen">
+      <div class="grid" id="grid"></div>
+      <div class="peek" aria-hidden="true"></div>
+    </div>
+
+    <div class="bar"><i id="prog"></i></div>
+
+    <div class="hud-bot">
+      <div class="tools">
+        <button class="ghost" id="peek">
+          <svg viewBox="0 0 24 24"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/></svg>
+          Ver original
+        </button>
+        <button class="ghost" id="shuffle">
+          <svg viewBox="0 0 24 24"><path d="M16 3h5v5"/><path d="M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+          Mezclar
+        </button>
+        <button class="ghost ghost-vip" id="passBtn" hidden>
+          <svg viewBox="0 0 24 24"><path d="M4 5h16v3a2 2 0 000 4v3H4v-3a2 2 0 000-4z"/></svg>
+          Mi pase VIP
+        </button>
+      </div>
+      <span class="hint" id="hint">Toca dos piezas para intercambiarlas.</span>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <span>MAYO 214 · Experiencia VIP <span class="sep">/</span> Rap desde la Sierra Oeste</span>
+    <span><a href="../index.html">Web oficial</a> <span class="sep">/</span>
+      <a href="mailto:Contrataciones.mayo214@gmail.com">Contratación</a></span>
+  </div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="winTitle">
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <div class="back" data-close></div>
+  <div class="sheet">
+    <button class="x" data-close aria-label="Cerrar">&#215;</button>
+    <span class="win-eyebrow">Acceso desbloqueado</span>
+    <h2 class="win-t" id="winTitle">Lo has<br><em>conseguido</em></h2>
+    <p class="win-sub">Has reconstruido el 214. Tu pase ya está activo: <b>entrada anticipada al concierto por 18 €</b>, antes de que salga a la venta para el resto.</p>
+
+    <div class="stats-win">
+      <span class="chip">Tiempo <b id="wTime">0:00</b></span>
+      <span class="chip">Movimientos <b id="wMoves">0</b></span>
+      <span class="chip">Tu récord <b id="wBest">—</b></span>
+    </div>
+
+    <div class="offer">
+      <div class="price">18<small>€</small></div>
+      <div class="txt">
+        <b>Entrada anticipada</b>
+        Concierto MAYO 214 · tarifa exclusiva para quien resuelve el puzzle.
+      </div>
+    </div>
+
+    <div class="code-row">
+      <span class="code" id="code">M214-VIP-0000</span>
+      <button class="cpy" id="copyBtn" aria-label="Copiar código">
+        <svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h8"/></svg>
+      </button>
+    </div>
+    <div class="timer"><span class="dotp"></span> Tu acceso caduca en <b id="cd">48:00:00</b></div>
+
+    <a class="cta" id="cta" href="#">
+      <svg viewBox="0 0 24 24"><path d="M4 5h16v3a2 2 0 000 4v3H4v-3a2 2 0 000-4z"/></svg>
+      Reservar mi entrada · 18 €
+    </a>
+    <div class="sub-acts">
+      <button class="small" id="posterBtn">
+        <svg viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 21h16"/></svg>
+        Descargar pase
+      </button>
+      <button class="small" id="shareBtn">
+        <svg viewBox="0 0 24 24"><path d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7"/><path d="M12 16V3"/><path d="M8 7l4-4 4 4"/></svg>
+        Compartir
+      </button>
+    </div>
+    <p class="legal">Pase personal. Válido solo durante el periodo de acceso anticipado y hasta agotar las plazas reservadas para esta experiencia.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="puzzle.js"></script>
+</body>
+</html>
