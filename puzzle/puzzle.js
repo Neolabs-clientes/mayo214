@@ -4,7 +4,9 @@
   /* ============ config ============ */
   var ROWS = 3, COLS = 3, N = ROWS * COLS;
   var CONTACT = 'Contrataciones.mayo214@gmail.com';
-  var LS = { code: 'm214_code', dl: 'm214_deadline', best: 'm214_best', snd: 'm214_snd' };
+  /* URL de la tienda de entradas. Si está vacía, el botón abre el correo de reserva. */
+  var TICKETS_URL = 'https://linktr.ee/mayo214_entradas';
+  var LS = { vip: 'm214_vip', dl: 'm214_deadline', best: 'm214_best', snd: 'm214_snd' };
 
   var boardEl = document.getElementById('board');
   var gridEl = document.getElementById('grid');
@@ -284,24 +286,15 @@
   }
 
   /* ============ modal ============ */
-  var code = '';
   var deadline = 0;
 
-  function makeCode() {
-    var abc = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', s = '';
-    for (var i = 0; i < 4; i++) s += abc[Math.floor(Math.random() * abc.length)];
-    return 'M214-VIP-' + s;
-  }
-
   function openModal() {
-    code = localStorage.getItem(LS.code);
-    if (!code) { code = makeCode(); localStorage.setItem(LS.code, code); }
+    try { localStorage.setItem(LS.vip, '1'); } catch (e) {}
     deadline = parseInt(localStorage.getItem(LS.dl) || '0', 10);
     if (!deadline || deadline < Date.now()) {
       deadline = Date.now() + 48 * 3600 * 1000;
       localStorage.setItem(LS.dl, String(deadline));
     }
-    document.getElementById('code').textContent = code;
     var st = lastResult;
     if (!st) { try { st = JSON.parse(localStorage.getItem('m214_stats') || 'null'); } catch (e) {} }
     if (st) paintStats(st.best || st.t); else paintStats(0);
@@ -342,9 +335,17 @@
   });
 
   function setCta() {
-    var subject = 'Entrada anticipada 18 € · ' + code;
-    var body = 'Hola.\n\nHe completado el puzzle del 214 y quiero mi entrada anticipada por 18 €.\n\n'
-      + 'Código VIP: ' + code + '\n'
+    var lbl = document.getElementById('ctaLbl');
+    if (TICKETS_URL) {
+      cta.href = TICKETS_URL;
+      cta.target = '_blank';
+      cta.rel = 'noopener';
+      if (lbl) lbl.textContent = 'Comprar entrada · 18 €';
+      return;
+    }
+    if (lbl) lbl.textContent = 'Reservar mi entrada · 18 €';
+    var subject = 'Entrada anticipada 18 € · puzzle completado';
+    var body = 'Hola.\n\nHe completado el puzzle y quiero mi entrada anticipada por 18 €.\n\n'
       + 'Tiempo: ' + fmt(seconds) + ' · Movimientos: ' + moves + '\n\n'
       + 'Gracias.';
     cta.href = 'mailto:' + CONTACT + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
@@ -440,22 +441,6 @@
     toastT = setTimeout(function () { toastEl.classList.remove('on'); }, 2000);
   }
 
-  /* ============ copy code ============ */
-  document.getElementById('copyBtn').addEventListener('click', function () {
-    var txt = document.getElementById('code').textContent;
-    function done() { toast('Código copiado'); beep(900, 0.08, 'sine', 0.06); }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(txt).then(done, fallback);
-    } else fallback();
-    function fallback() {
-      var ta = document.createElement('textarea');
-      ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
-      document.body.appendChild(ta); ta.select();
-      try { document.execCommand('copy'); done(); } catch (e) { toast('Copia el código a mano'); }
-      document.body.removeChild(ta);
-    }
-  });
-
   /* ============ poster ============ */
   document.getElementById('posterBtn').addEventListener('click', function () {
     var img = new Image();
@@ -499,21 +484,17 @@
 
     g.fillStyle = 'rgba(255,51,85,.95)';
     g.font = '700 22px Inter, sans-serif';
-    g.fillText('ACCESO DESBLOQUEADO', 64, H - 400);
+    g.fillText('ACCESO DESBLOQUEADO', 64, H - 352);
 
     g.fillStyle = '#F1F3F4';
     g.font = '400 118px Anton, Impact, sans-serif';
-    g.fillText('PASE VIP', 60, H - 366);
+    g.fillText('PASE VIP', 60, H - 318);
 
     g.fillStyle = '#FF8A9B';
-    g.fillRect(64, H - 218, W - 128, 1);
+    g.fillRect(64, H - 170, W - 128, 2);
 
     g.fillStyle = '#F1F3F4';
-    g.font = '600 30px ui-monospace, Menlo, monospace';
-    g.fillText(code, 64, H - 196);
-
-    g.fillStyle = 'rgba(241,243,244,.78)';
-    g.font = '700 24px Inter, sans-serif';
+    g.font = '700 30px Inter, sans-serif';
     g.fillText('ENTRADA ANTICIPADA · 18 €', 64, H - 138);
 
     g.fillStyle = 'rgba(241,243,244,.42)';
@@ -525,7 +506,7 @@
       var url = URL.createObjectURL(blob);
       var a = document.createElement('a');
       a.href = url;
-      a.download = 'mayo214-pase-vip-' + code.replace(/[^A-Z0-9]/gi, '') + '.png';
+      a.download = 'mayo214-pase-vip.png';
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
       setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
       toast('Pase descargado');
@@ -552,7 +533,7 @@
   /* ============ init ============ */
   build();
   newGame();
-  try { if (localStorage.getItem(LS.code)) document.getElementById('passBtn').hidden = false; } catch (e) {}
+  try { if (localStorage.getItem(LS.vip)) document.getElementById('passBtn').hidden = false; } catch (e) {}
   armSong();
   /* ============ portada ============ */
   var gate = document.getElementById('gate');
