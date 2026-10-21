@@ -18,6 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="puzzle.css">
+<script src="https://neo-metrics.dortizs76.workers.dev/beacon.js" data-site="mayo214" defer></script>
 </head>
 <body>
 
@@ -120,6 +121,25 @@
       <span class="chip">Tu récord <b id="wBest">—</b></span>
     </div>
 
+    <form class="lead" id="leadForm" novalidate>
+      <p class="lead-t">Déjanos tu contacto y te abrimos <b>el enlace de compra</b> al instante.</p>
+      <div class="lead-row">
+        <input type="email" id="leadEmail" placeholder="tu@email.com" autocomplete="email" inputmode="email">
+        <input type="tel" id="leadTel" placeholder="Teléfono (opcional)" autocomplete="tel" inputmode="tel">
+      </div>
+      <label class="check"><input type="checkbox" id="leadMkt">
+        Quiero que Mayo 214 me avise de conciertos, entradas y merchan.</label>
+      <label class="check"><input type="checkbox" id="leadOk">
+        He leído y acepto la <a href="../politica-privacidad.html" target="_blank" rel="noopener">política de privacidad</a>.</label>
+      <button class="cta" type="submit" id="leadBtn">
+        <svg viewBox="0 0 24 24"><path d="M4 5h16v3a2 2 0 000 4v3H4v-3a2 2 0 000-4z"/></svg>
+        <span id="leadLbl">Desbloquear mi entrada</span>
+      </button>
+      <p class="lead-err" id="leadErr" role="alert"></p>
+      <p class="lead-note">Solo lo que haga Mayo 214. Sin spam y te puedes dar de baja cuando quieras.</p>
+    </form>
+
+    <div id="premio" hidden>
     <div class="offer">
       <div class="price">18<small>€</small></div>
       <div class="txt">
@@ -144,6 +164,7 @@
       </button>
     </div>
     <p class="legal">Pase personal. Válido solo durante el periodo de acceso anticipado y hasta agotar las plazas reservadas para esta experiencia.</p>
+    </div>
   </div>
 </div>
 

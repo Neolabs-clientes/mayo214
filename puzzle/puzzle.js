@@ -6,7 +6,21 @@
   var CONTACT = 'Contrataciones.mayo214@gmail.com';
   /* URL de la tienda de entradas. Si está vacía, el botón abre el correo de reserva. */
   var TICKETS_URL = 'https://linktr.ee/mayo214_entradas';
+  if (TICKETS_URL) {
+    TICKETS_URL += (TICKETS_URL.indexOf('?') > -1 ? '&' : '?')
+      + 'utm_source=puzzle&utm_medium=web&utm_campaign=mayo214-vip';
+  }
   var LS = { vip: 'm214_vip', dl: 'm214_deadline', best: 'm214_best', snd: 'm214_snd' };
+  LS.lead = 'm214_lead';
+  var API = 'https://neo-metrics.dortizs76.workers.dev';
+  var SITE_KEY = 'mayo214';
+  var LEADS = true;
+  function track(t, m) {
+    try { if (window.neo) window.neo(t, m); } catch (e) {}
+  }
+  function vidPuzzle() {
+    try { return localStorage.getItem('nm_vid') || ''; } catch (e) { return ''; }
+  }
 
   var boardEl = document.getElementById('board');
   var gridEl = document.getElementById('grid');
@@ -255,6 +269,7 @@
   function win() {
     if (unlocked) return;
     unlocked = true; locked = true;
+    track('solve', { m: moves, t: seconds });
     clearInterval(timerId); timerId = null;
 
     for (var i = 0; i < N; i++) {
@@ -300,6 +315,7 @@
     if (st) paintStats(st.best || st.t); else paintStats(0);
     document.getElementById('passBtn').hidden = false;
     setCta();
+    prepararContacto();
     modal.classList.add('on');
     document.body.style.overflow = 'hidden';
     tickCd();
@@ -350,6 +366,65 @@
       + 'Gracias.';
     cta.href = 'mailto:' + CONTACT + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   }
+
+  /* ============ contacto ============ */
+  var leadForm = document.getElementById('leadForm');
+  var premio = document.getElementById('premio');
+
+  function mostrarPremio() {
+    if (leadForm) leadForm.hidden = true;
+    if (premio) premio.hidden = false;
+  }
+
+  function prepararContacto() {
+    if (!LEADS) { mostrarPremio(); return; }
+    var hecho = '';
+    try { hecho = localStorage.getItem(LS.lead) || ''; } catch (e) {}
+    if (hecho) { mostrarPremio(); return; }
+    if (leadForm) leadForm.hidden = false;
+    if (premio) premio.hidden = true;
+    track('lead_form');
+    setTimeout(function () {
+      var campo = document.getElementById('leadEmail');
+      if (campo) campo.focus();
+    }, 450);
+  }
+
+  function enviarLead(ev) {
+    ev.preventDefault();
+    var email = (document.getElementById('leadEmail').value || '').trim();
+    var tel = (document.getElementById('leadTel').value || '').trim();
+    var acepta = document.getElementById('leadOk').checked;
+    var ofertas = document.getElementById('leadMkt').checked;
+    var err = document.getElementById('leadErr');
+    var btn = document.getElementById('leadBtn');
+    var lbl = document.getElementById('leadLbl');
+    err.textContent = '';
+    if (!email && !tel) { err.textContent = 'Déjanos un email o un teléfono.'; return; }
+    if (email && !/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email)) {
+      err.textContent = 'Ese email no parece válido.'; return;
+    }
+    if (!acepta) { err.textContent = 'Necesitamos que aceptes la política de privacidad.'; return; }
+    btn.disabled = true;
+    if (lbl) lbl.textContent = 'Guardando…';
+    fetch(API + '/lead', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ s: SITE_KEY, e: email, t: tel, c: true, m: ofertas, o: 'puzzle', v: vidPuzzle() }),
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      if (!d.ok) throw new Error(d.error || 'error');
+      try { localStorage.setItem(LS.lead, '1'); } catch (e) {}
+      track('lead');
+      mostrarPremio();
+    }).catch(function () {
+      btn.disabled = false;
+      if (lbl) lbl.textContent = 'Desbloquear mi entrada';
+      err.textContent = 'No se ha podido guardar. Inténtalo otra vez.';
+    });
+  }
+
+  if (leadForm) leadForm.addEventListener('submit', enviarLead);
+  if (cta) cta.addEventListener('click', function () { track('cta'); });
 
   var cdId = null;
   function tickCd() {
@@ -443,6 +518,7 @@
 
   /* ============ poster ============ */
   document.getElementById('posterBtn').addEventListener('click', function () {
+    track('pase');
     var img = new Image();
     img.onload = function () { drawPoster(img); };
     img.onerror = function () { toast('No se pudo generar el pase'); };
@@ -542,6 +618,7 @@
     var enter = function () {
       if (entered) return;
       entered = true;
+      track('start');
       gate.classList.add('off');
       playSong();
       sndPick();
