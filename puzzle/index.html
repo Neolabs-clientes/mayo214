@@ -37,7 +37,7 @@
   <div class="wrap top-in">
     <a class="brand" href="../index.html">MAYO <b>214</b><span class="dot"></span></a>
     <div class="top-r">
-      <span class="pill-vip"><svg viewBox="0 0 24 24"><path d="M4 5h16v3a2 2 0 000 4v3H4v-3a2 2 0 000-4z"/></svg> Acceso anticipado</span>
+      <span class="pill-vip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> Acceso anticipado</span>
       <button class="snd" id="snd" aria-label="Sonido" aria-pressed="true">
         <svg viewBox="0 0 24 24"><path d="M4 9v6h3l5 4V5L7 9H4z"/><path d="M16.5 8.5a5 5 0 010 7"/></svg>
       </button>
@@ -114,30 +114,30 @@
     <span class="win-eyebrow">Acceso desbloqueado</span>
     <h2 class="win-t" id="winTitle">Lo has<br><em>conseguido</em></h2>
     <p class="win-sub">Has reconstruido a Mayito. Tu pase ya está activo: <b>entrada anticipada al concierto por 18 €</b>, antes de que salga a la venta para el resto.</p>
-
-    <div class="stats-win">
-      <span class="chip">Tiempo <b id="wTime">0:00</b></span>
-      <span class="chip">Movimientos <b id="wMoves">0</b></span>
-      <span class="chip">Tu récord <b id="wBest">—</b></span>
-    </div>
-
-    <form class="lead" id="leadForm" novalidate>
+    <form class="captura" id="leadForm" novalidate>
       <p class="lead-t">Déjanos tu contacto y te abrimos <b>el enlace de compra</b> al instante.</p>
       <div class="lead-row">
         <input type="email" id="leadEmail" placeholder="tu@email.com" autocomplete="email" inputmode="email">
         <input type="tel" id="leadTel" placeholder="Teléfono (opcional)" autocomplete="tel" inputmode="tel">
       </div>
       <label class="check"><input type="checkbox" id="leadMkt">
-        Quiero que Mayo 214 me avise de conciertos, entradas y merchan.</label>
+        <span>Quiero que Mayo 214 me avise de conciertos, entradas y merchan.</span></label>
       <label class="check"><input type="checkbox" id="leadOk">
-        He leído y acepto la <a href="../politica-privacidad.html" target="_blank" rel="noopener">política de privacidad</a>.</label>
+        <span>He leído y acepto la <a href="../politica-privacidad.html" target="_blank" rel="noopener">política de privacidad</a>.</span></label>
       <button class="cta" type="submit" id="leadBtn">
         <svg viewBox="0 0 24 24"><path d="M4 5h16v3a2 2 0 000 4v3H4v-3a2 2 0 000-4z"/></svg>
-        <span id="leadLbl">Desbloquear mi entrada</span>
+        <span id="leadLbl">Desbloquear entrada</span>
       </button>
       <p class="lead-err" id="leadErr" role="alert"></p>
       <p class="lead-note">Solo lo que haga Mayo 214. Sin spam y te puedes dar de baja cuando quieras.</p>
     </form>
+
+
+    <div class="stats-win">
+      <span class="chip">Tiempo <b id="wTime">0:00</b></span>
+      <span class="chip">Movimientos <b id="wMoves">0</b></span>
+      <span class="chip">Tu récord <b id="wBest">—</b></span>
+    </div>
 
     <div id="premio" hidden>
     <div class="offer">

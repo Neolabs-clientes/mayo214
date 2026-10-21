@@ -302,23 +302,23 @@ h1 em{font-style:normal;-webkit-text-stroke:1.5px rgba(241,243,244,.75);color:tr
 }
 
 /* ---------- captación de contacto ---------- */
-.lead{margin:22px 0 0;padding:18px;border:1px solid rgba(255,255,255,.10);border-radius:14px;
+.captura{margin:22px 0 0;padding:18px;border:1px solid rgba(255,255,255,.10);border-radius:14px;
   background:rgba(255,255,255,.03);text-align:left}
-.lead-t{font-size:.92rem;line-height:1.45;color:var(--cream);margin:0 0 14px}
-.lead-t b{color:var(--cyan)}
-.lead-row{display:grid;gap:10px;grid-template-columns:1fr 1fr}
-.lead input[type=email],.lead input[type=tel]{width:100%;padding:13px 14px;border-radius:10px;
+.captura-t{font-size:.92rem;line-height:1.45;color:var(--cream);margin:0 0 14px}
+.captura-t b{color:var(--cyan)}
+.captura-row{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+.captura input[type=email],.captura input[type=tel]{width:100%;padding:13px 14px;border-radius:10px;
   border:1px solid rgba(255,255,255,.14);background:rgba(0,0,0,.35);color:var(--cream);
   font-family:var(--body);font-size:.9rem;box-sizing:border-box}
-.lead input:focus{outline:none;border-color:var(--cyan)}
-.lead input::placeholder{color:rgba(241,243,244,.35)}
+.captura input:focus{outline:none;border-color:var(--cyan)}
+.captura input::placeholder{color:rgba(241,243,244,.35)}
 .check{display:flex;gap:9px;align-items:flex-start;margin:11px 0 0;font-size:.76rem;
   line-height:1.4;color:var(--muted);cursor:pointer}
 .check input{margin:2px 0 0;accent-color:var(--cyan);width:15px;height:15px;flex:0 0 auto}
 .check a{color:var(--cyan)}
-.lead button.cta{width:100%;margin-top:14px;border:0;cursor:pointer;font-family:var(--body)}
-.lead button.cta[disabled]{opacity:.6;cursor:wait}
-.lead-err{color:#FF8A9B;font-size:.78rem;margin:10px 0 0;min-height:1em}
-.lead-note{color:rgba(241,243,244,.4);font-size:.68rem;margin:10px 0 0;line-height:1.4}
-#premio[hidden],.lead[hidden]{display:none}
-@media(max-width:520px){.lead-row{grid-template-columns:1fr}}
+.captura button.cta{width:100%;margin-top:14px;border:0;cursor:pointer;font-family:var(--body)}
+.captura button.cta[disabled]{opacity:.6;cursor:wait}
+.captura-err{color:#FF8A9B;font-size:.78rem;margin:10px 0 0;min-height:1em}
+.captura-note{color:rgba(241,243,244,.4);font-size:.68rem;margin:10px 0 0;line-height:1.4}
+#premio[hidden],.captura[hidden]{display:none}
+@media(max-width:520px){.captura-row{grid-template-columns:1fr}}
