@@ -175,3 +175,11 @@
   .fechas li{grid-template-columns:4.2rem minmax(0,1fr);row-gap:.6rem}
   .f-entradas{grid-column:2;justify-self:start;font-size:.66rem;padding:.56rem .95rem}
 }
+
+/* ---------- GIRA 2027 · filas sin fecha publicada (28-oct-2026) ---------- */
+.fechas li.sin-fecha{grid-template-columns:minmax(0,1fr) auto;row-gap:0}
+.fechas li.sin-fecha .f-sitio b{font-size:clamp(1.02rem,1.5vw,1.2rem)}
+@media(max-width:560px){
+  .fechas li.sin-fecha{grid-template-columns:minmax(0,1fr) auto;row-gap:0}
+  .fechas li.sin-fecha .f-entradas{grid-column:2;justify-self:end}
+}
