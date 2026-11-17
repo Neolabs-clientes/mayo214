@@ -1,0 +1,50 @@
+/* Merch — Mayo 214
+   Dos productos (blanca y negra), tallas S a XXL, compra directa a Shopify. */
+
+#merch .merch-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,40px);
+  max-width:1000px;margin:clamp(30px,4vw,56px) auto 0;
+}
+
+.camiseta{
+  display:flex;flex-direction:column;overflow:hidden;
+  border:1px solid var(--line);border-radius:4px;background:var(--panel);
+  transition:border-color .4s var(--ease),transform .4s var(--ease);
+}
+.camiseta:hover{border-color:var(--line2);transform:translateY(-3px)}
+
+.camiseta .merch-foto{position:relative;aspect-ratio:1/1;background:#EDEDEA;overflow:hidden}
+.camiseta .merch-foto img{width:100%;height:100%;object-fit:cover}
+
+.camiseta .cuerpo{
+  display:flex;flex-direction:column;gap:.95rem;flex:1;
+  padding:clamp(18px,2.2vw,28px);
+}
+.camiseta h3{font-size:clamp(1.35rem,2.1vw,1.9rem);margin:0}
+.camiseta .meta{
+  font-size:.7rem;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--muted2);margin:0;
+}
+
+.tallas{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;margin:.15rem 0 .2rem}
+.talla{
+  width:100%;height:46px;border:1px solid var(--line2);border-radius:3px;
+  background:transparent;color:var(--cream);cursor:pointer;
+  font-family:var(--body);font-weight:600;font-size:.86rem;letter-spacing:.04em;
+  transition:background .22s var(--ease),border-color .22s var(--ease),color .22s var(--ease);
+}
+.talla:hover{border-color:var(--cream)}
+.talla[aria-checked="true"]{background:var(--cream);border-color:var(--cream);color:var(--ink)}
+.talla:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+.camiseta .comprar{justify-content:center;width:100%;margin-top:auto;padding:.95rem 1.2rem}
+.camiseta .comprar:disabled{background:transparent;border:1px solid var(--line2,#2A3038);
+  color:var(--muted2,#6C7379);opacity:1;cursor:not-allowed;transform:none}
+
+#merch .merch-nota{margin-top:1.6rem;font-size:.78rem;color:var(--muted2);line-height:1.5}
+
+@media(max-width:780px){
+  #merch .merch-grid{grid-template-columns:1fr}
+  .tallas{gap:.35rem}
+  .talla{min-width:0}
+}
